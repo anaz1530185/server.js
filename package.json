@@ -1,0 +1,26 @@
+{
+  "name": "server.js",
+  "version": "1.0.0",
+  "description": "simple node server",
+  "main": "server.js",
+  "scripts": {
+    "test": "SH",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anaz1530185/server.js.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "ME",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anaz1530185/server.js/issues"
+  },
+  "homepage": "https://github.com/anaz1530185/server.js#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.0"
+  }
+}
