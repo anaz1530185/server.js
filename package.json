@@ -22,5 +22,8 @@
   "homepage": "https://github.com/anaz1530185/server.js#readme",
   "devDependencies": {
     "nodemon": "^1.18.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3"
   }
 }
