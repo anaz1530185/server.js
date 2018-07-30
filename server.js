@@ -69,7 +69,7 @@ server.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(
 
 //Classwork8 //how data is saved from fontend to database
 
-var http = require('http');
+/*var http = require('http');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -119,6 +119,91 @@ app.post('/submit_user', function(req, res){
   console.log(req.body);
   save(req.body);
   res.status('200');
+});
+
+app.get('/system/about', function(req, res){
+  res.sendFile(__dirname+'/about.html');
+});
+
+server.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
+    console.log('Server running');
+});*/
+
+//Classwork9
+
+var http = require('http');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://"+process.env.IP+":27017/node-cw8");
+//For C9
+mongoose.connection.on('error',function()
+{
+  console.log('Could not connect to mongobd');
+});
+//define user schema with mongoose also we can add more option here so that user can view
+var userSchema = new mongoose.Schema({
+  name : {
+      type: String,
+      require: "Name is required"
+  },
+  email: String
+});
+var User = mongoose.model('User',userSchema);
+
+
+//var mongo = require('mongodb');
+
+//for local
+//var db, uri = "mongodb://localhost:28017";
+
+//uri = "mongodb://"+process.env.IP+":27017";
+
+//mongo.MongoClient.connect(uri
+//,{useNewUrlParser: true}, function(err,client)
+//{
+//  if(err)
+ // {
+  //  console.log("Could not connect to MongoDB");
+ // }
+ // else
+//  {
+  //  db = client.db('simple-node');
+//  }
+//});
+
+/*var save = function(form_data)   //save data from frontend
+{
+  db.createCollection('users', function(err, collection){});
+  var collection = db.collection('users');
+  collection.save(form_data);
+}*/
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
+var server = http.Server(app);
+
+app.get('/', function(req, res){
+  res.sendFile(__dirname+'/index.html');
+});
+
+app.get('/form', function(req, res){
+  res.sendFile(__dirname+'/form.html');
+});
+
+app.post('/submit_user', function(req, res){
+  console.log(req.body);
+  //save(req.body);
+  var new_user = new User(req.body);
+  new_user.save(function(err,data){
+    if(err)
+    return rs.status(400).json({messege:"Could not save user"});
+    res.status(200).json(data);
+  })
+  //save(reqbody);
+  //res.status('200');
 });
 
 app.get('/system/about', function(req, res){
